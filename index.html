@@ -260,8 +260,8 @@
     <!-- 详情页 -->
     <section class="screen" id="screen-details">
       <span class="emoji-hero">🎀</span>
-      <h1>太好啦！那我们来安排一下~</h1>
-      <p class="sub">告诉我你的小心愿吧 ✨</p>
+      <h1>太好啦 cc！那我们来安排一下~</h1>
+      <p class="sub">告诉我 cc 的小心愿吧 ✨</p>
 
       <div class="field">
         <label>🍽️ 想去哪里吃呀？</label>
@@ -288,8 +288,8 @@
     <!-- 确认 / 结果页 -->
     <section class="screen" id="screen-done">
       <span class="emoji-hero">💝</span>
-      <h1 id="doneTitle">约会预定成功！</h1>
-      <p class="sub" id="doneSub">这是我们的小约定~</p>
+      <h1 id="doneTitle">cc 的约会预定成功！</h1>
+      <p class="sub" id="doneSub">这是我和 cc 的小约定~</p>
 
       <div class="summary" id="summaryCard"></div>
 
@@ -312,19 +312,19 @@
    ============================================================ */
 const CONFIG = {
   // 开场标题（首次显示）
-  askTitle: "亲爱的，可以赏脸和我约个会吗？",
-  askSub: "（这是一个很重要的邀请哦~）",
+  askTitle: "cc 宝贝，可以赏脸和我约个会吗？",
+  askSub: "（这是给 cc 的一个很重要的邀请哦~）",
 
   // 点“不要”时循环切换的俏皮话术 + 对应表情
   persuasions: [
-    { emoji: "🥺", title: "诶？再想想嘛~ 拒绝我可是会伤心的哦" },
-    { emoji: "🙈", title: "不行不行，这个答案我不接受，再选一次！" },
+    { emoji: "🥺", title: "诶？cc 再想想嘛~ 拒绝我可是会伤心的哦" },
+    { emoji: "🙈", title: "不行不行，这个答案我不接受，cc 再选一次！" },
     { emoji: "🍰", title: "我已经想好带你去吃好吃的啦，真的不来？" },
     { emoji: "🐰", title: "哼，不许点那个按钮！它会咬人的！" },
-    { emoji: "🌷", title: "就当赏我一个面子嘛，好不好嘛~" },
+    { emoji: "🌷", title: "就当 cc 赏我一个面子嘛，好不好嘛~" },
     { emoji: "😽", title: "你看，连小猫都在求你答应了呀" },
-    { emoji: "💐", title: "我准备了小惊喜哦，选“好”才能看到~" },
-    { emoji: "🥹", title: "最后一次机会啦，答应我好不好？" },
+    { emoji: "💐", title: "我给 cc 准备了小惊喜哦，选“好”才能看到~" },
+    { emoji: "🥹", title: "最后一次机会啦，cc 答应我好不好？" },
     { emoji: "💖", title: "好啦好啦，那个键别点了，点这个大大的“好”嘛！" },
   ],
 
@@ -646,8 +646,8 @@ document.getElementById("btnShare").addEventListener("click", async () => {
   if (!q.has("r") || !q.has("t")) return;
   const data = { r: q.get("r") || "", t: q.get("t") || "", m: q.get("m") || "" };
 
-  document.getElementById("doneTitle").textContent = "她答应啦！💕";
-  document.getElementById("doneSub").textContent = "这是她选好的小约定~";
+  document.getElementById("doneTitle").textContent = "cc 答应啦！💕";
+  document.getElementById("doneSub").textContent = "这是 cc 选好的小约定~";
   renderSummary(data);
 
   // 收件人视图：把按钮换成“加入日历 / 重新发起”
