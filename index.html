@@ -3,39 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>七夕 · 要和我约会吗</title>
+<title>Qixi · Date with cc</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --night: #0c1018;
-    --ink: #e8dfd2;
-    --muted: #b8ab9a;
-    --gold: #d4b56a;
-    --gold-soft: #e8d09a;
-    --cinnabar: #c45c5c;
-    --card: rgba(18, 16, 22, 0.62);
-    --line: rgba(212, 181, 106, 0.28);
-    --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    --bg: #0a0b10;
+    --text: #f4f1ea;
+    --muted: #9a948b;
+    --rose: #ff6b8a;
+    --rose-soft: #ff8fa3;
+    --card: rgba(22, 22, 28, 0.72);
+    --line: rgba(255, 255, 255, 0.08);
   }
 
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { height: 100%; margin: 0; }
 
   body {
-    font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", sans-serif;
-    color: var(--ink);
+    font-family: "Manrope", "Noto Sans SC", "PingFang SC", sans-serif;
+    color: var(--text);
     min-height: 100dvh;
     overflow-x: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 22px 16px;
+    padding: 24px 16px;
     background:
-      radial-gradient(ellipse 80% 50% at 50% 100%, rgba(90, 42, 58, 0.38) 0%, transparent 55%),
-      radial-gradient(ellipse 60% 40% at 80% 10%, rgba(40, 48, 80, 0.45) 0%, transparent 50%),
-      linear-gradient(180deg, #07090f 0%, #12161f 52%, #1a1520 100%);
+      radial-gradient(ellipse 70% 45% at 80% 0%, rgba(255, 107, 138, 0.16), transparent 55%),
+      radial-gradient(ellipse 50% 40% at 10% 90%, rgba(120, 90, 220, 0.12), transparent 50%),
+      linear-gradient(180deg, #0a0b10 0%, #12131a 100%);
   }
 
   canvas#sky, canvas#fireworks {
@@ -48,278 +46,219 @@
   }
   canvas#fireworks { z-index: 1; }
 
-  .horizon {
-    position: fixed;
-    left: 0; right: 0; bottom: 0;
-    height: 22vh;
-    pointer-events: none;
-    z-index: 1;
-    background: linear-gradient(180deg, transparent, rgba(8, 8, 12, 0.55));
-  }
-  .horizon::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 6%;
-    width: 72%;
-    height: 18px;
-    transform: translateX(-50%);
-    border-radius: 50%;
-    background: transparent;
-    box-shadow: 0 0 40px 8px rgba(212, 181, 106, 0.06);
-    border-bottom: 1px solid rgba(212, 181, 106, 0.12);
-  }
-
-  .moon {
-    position: fixed;
-    top: 9vh;
-    right: 11vw;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    z-index: 1;
-    pointer-events: none;
-    background: radial-gradient(circle at 35% 32%, #f7ecd0, #d8c38a 62%, #b9a06a);
-    box-shadow: 0 0 28px rgba(232, 208, 154, 0.28), 0 0 80px rgba(212, 181, 106, 0.12);
-    opacity: 0.88;
-  }
-
-  .stage { position: relative; z-index: 2; width: 100%; max-width: 440px; }
+  .stage { position: relative; z-index: 2; width: 100%; max-width: 420px; }
 
   .card {
     background: var(--card);
-    backdrop-filter: blur(18px) saturate(1.1);
-    -webkit-backdrop-filter: blur(18px) saturate(1.1);
-    border-radius: 8px;
-    padding: 36px 26px 30px;
-    box-shadow: var(--shadow);
+    backdrop-filter: blur(22px) saturate(1.2);
+    -webkit-backdrop-filter: blur(22px) saturate(1.2);
+    border-radius: 28px;
+    padding: 32px 24px 28px;
     border: 1px solid var(--line);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     text-align: center;
-    position: relative;
   }
-  .card::before,
-  .card::after {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border: 1px solid rgba(212, 181, 106, 0.45);
-    pointer-events: none;
-  }
-  .card::before { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-  .card::after { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
 
-  .seal {
-    position: absolute;
-    top: 16px;
-    right: 18px;
-    width: 36px;
-    height: 36px;
-    border: 1.5px solid rgba(196, 92, 92, 0.7);
-    color: rgba(196, 92, 92, 0.82);
-    font-family: "Noto Serif SC", serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    display: flex;
+  .chip {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    transform: rotate(12deg);
-    opacity: 0.9;
+    gap: 8px;
+    padding: 5px 11px 5px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+  }
+  .chip i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--rose);
+    box-shadow: 0 0 10px rgba(255, 107, 138, 0.7);
   }
 
-  .screen { display: none; animation: rise 0.55s ease; }
+  .screen { display: none; animation: up 0.42s ease; }
   .screen.active { display: block; }
-  @keyframes rise {
-    from { transform: translateY(10px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
+  @keyframes up {
+    from { transform: translateY(8px); opacity: 0; }
+    to { transform: none; opacity: 1; }
   }
 
-  .hero-mark {
-    font-family: "Noto Serif SC", serif;
-    font-size: 42px;
-    letter-spacing: 0.28em;
-    color: var(--gold-soft);
-    display: inline-block;
-    margin: 4px 0 2px;
-    text-indent: 0.28em;
-    animation: floatMark 5s ease-in-out infinite;
-  }
-  @keyframes floatMark {
-    0%, 100% { transform: translateY(0); opacity: 0.92; }
-    50% { transform: translateY(-5px); opacity: 1; }
+  .hero {
+    width: 64px;
+    height: 64px;
+    margin: 4px auto 10px;
+    border-radius: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+    background: linear-gradient(160deg, rgba(255, 107, 138, 0.22), rgba(255, 255, 255, 0.04));
+    border: 1px solid rgba(255, 143, 163, 0.2);
   }
 
   h1 {
-    font-family: "Noto Serif SC", serif;
-    font-weight: 600;
-    font-size: 23px;
-    margin: 12px 0 8px;
-    line-height: 1.55;
-    color: var(--gold-soft);
-    letter-spacing: 0.04em;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 8px 0 8px;
+    letter-spacing: -0.02em;
   }
   .sub {
-    font-size: 13.5px;
+    font-size: 14px;
     color: var(--muted);
-    margin: 0 0 26px;
+    margin: 0 0 24px;
     min-height: 20px;
-    letter-spacing: 0.04em;
+    line-height: 1.55;
   }
 
   .btns {
-    position: relative;
     display: flex;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    min-height: 68px;
+    min-height: 64px;
   }
 
   button {
     font-family: inherit;
     cursor: pointer;
     border: none;
-    border-radius: 2px;
-    font-weight: 500;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease, opacity 0.2s ease;
+    font-weight: 650;
+    transition: transform 0.16s ease, opacity 0.2s ease, box-shadow 0.2s ease;
   }
   button:active { transform: scale(0.96); }
 
   .btn-yes {
-    background: linear-gradient(180deg, #d8b56e, #b8893d);
-    color: #1a140c;
-    padding: 13px 28px;
+    background: var(--rose);
+    color: #fff;
+    border-radius: 999px;
+    padding: 13px 26px;
     font-size: 16px;
-    letter-spacing: 0.08em;
-    box-shadow: 0 8px 20px rgba(184, 137, 61, 0.28);
+    box-shadow: 0 10px 24px rgba(255, 107, 138, 0.32);
   }
-  .btn-yes:hover { transform: translateY(-1px); }
-
   .btn-no {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.04);
     color: var(--muted);
+    border-radius: 999px;
     padding: 12px 20px;
     font-size: 15px;
-    border: 1px solid rgba(184, 171, 154, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .field { text-align: left; margin: 0 0 18px; }
   .field > label {
     display: block;
-    font-family: "Noto Serif SC", serif;
-    font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 650;
     margin: 0 0 10px;
-    color: var(--gold);
-    letter-spacing: 0.06em;
+    color: #d8d2c8;
   }
 
   .options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .opt {
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(232, 223, 210, 0.12);
-    border-radius: 4px;
-    padding: 11px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 12px 8px;
     font-size: 13.5px;
-    font-weight: 500;
-    color: var(--ink);
+    font-weight: 600;
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
   }
   .opt .oemoji { font-size: 20px; }
   .opt.selected {
-    border-color: rgba(212, 181, 106, 0.7);
-    background: rgba(212, 181, 106, 0.1);
-    box-shadow: 0 0 0 1px rgba(212, 181, 106, 0.12);
+    border-color: rgba(255, 107, 138, 0.55);
+    background: rgba(255, 107, 138, 0.12);
   }
 
   input[type="text"], input[type="datetime-local"], textarea {
     width: 100%;
     font-family: inherit;
     font-size: 14px;
-    color: var(--ink);
-    border: 1px solid rgba(232, 223, 210, 0.16);
-    border-radius: 4px;
-    padding: 11px 12px;
-    background: rgba(0, 0, 0, 0.22);
+    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 12px 13px;
+    background: rgba(255, 255, 255, 0.04);
     outline: none;
     color-scheme: dark;
   }
-  input:focus, textarea:focus { border-color: var(--gold); }
+  input:focus, textarea:focus { border-color: rgba(255, 107, 138, 0.55); }
   textarea { resize: none; min-height: 64px; }
   .custom-wrap { margin-top: 8px; display: none; }
   .custom-wrap.show { display: block; }
-  .hint { font-size: 12px; color: #c45c5c; margin: 6px 2px 0; min-height: 16px; }
+  .hint { font-size: 12px; color: var(--rose-soft); margin: 6px 2px 0; min-height: 16px; }
 
   .summary {
     text-align: left;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px dashed rgba(212, 181, 106, 0.35);
-    border-radius: 4px;
-    padding: 16px 18px;
-    margin: 8px 0 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 18px;
+    padding: 14px 16px;
+    margin: 6px 0 20px;
   }
-  .summary .row { display: flex; align-items: flex-start; gap: 10px; padding: 7px 0; font-size: 14px; }
-  .summary .row .k { font-size: 16px; }
-  .summary .row .v { flex: 1; color: var(--muted); }
-  .summary .row .v b { color: var(--gold-soft); font-weight: 600; }
+  .summary .row { display: flex; gap: 10px; padding: 7px 0; font-size: 14px; color: var(--muted); }
+  .summary .row b { color: var(--text); font-weight: 650; }
 
   .stack { display: flex; flex-direction: column; gap: 10px; }
   .btn-wide {
     width: 100%;
     padding: 13px;
     font-size: 15px;
-    letter-spacing: 0.08em;
-    background: linear-gradient(180deg, #d8b56e, #b8893d);
-    color: #1a140c;
-    box-shadow: 0 8px 18px rgba(184, 137, 61, 0.24);
+    border-radius: 999px;
+    background: var(--rose);
+    color: #fff;
+    box-shadow: 0 10px 22px rgba(255, 107, 138, 0.28);
   }
   .btn-ghost {
     width: 100%;
     padding: 12px;
     font-size: 14px;
+    border-radius: 999px;
     background: transparent;
-    color: var(--gold-soft);
-    border: 1px solid rgba(212, 181, 106, 0.35);
+    color: var(--text);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .toast {
     position: fixed;
     left: 50%;
-    bottom: 34px;
-    transform: translateX(-50%) translateY(24px);
-    background: rgba(20, 16, 22, 0.92);
-    color: var(--gold-soft);
-    border: 1px solid var(--line);
-    padding: 11px 20px;
-    border-radius: 2px;
+    bottom: 32px;
+    transform: translateX(-50%) translateY(20px);
+    background: #1a1b22;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 11px 18px;
+    border-radius: 999px;
     font-size: 13px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s ease;
+    transition: all 0.28s ease;
     z-index: 50;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   .footnote {
     margin-top: 18px;
-    font-family: "Noto Serif SC", serif;
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    color: rgba(184, 171, 154, 0.45);
+    font-size: 12px;
+    color: #6f6a64;
   }
 
   @media (max-width: 380px) {
     h1 { font-size: 20px; }
-    .card { padding: 32px 20px 26px; }
-    .hero-mark { font-size: 36px; }
+    .card { padding: 28px 18px 24px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-mark, .screen { animation: none; }
+    .screen { animation: none; }
   }
 </style>
 </head>
@@ -327,30 +266,28 @@
 
 <canvas id="sky"></canvas>
 <canvas id="fireworks"></canvas>
-<div class="horizon"></div>
-<div class="moon" aria-hidden="true"></div>
 
 <div class="stage">
   <div class="card">
-    <div class="seal">七夕</div>
+    <div class="chip"><i></i> Qixi · 08.19</div>
 
     <section class="screen active" id="screen-ask">
-      <div class="hero-mark" id="askEmoji">鹊</div>
-      <h1 id="askTitle">cc，七夕这一夜，可以赏脸和我见一面吗？</h1>
-      <p class="sub" id="askSub">鹊桥难再，这一次，想把位置留给你。</p>
+      <div class="hero" id="askEmoji">💗</div>
+      <h1 id="askTitle">cc，七夕晚上出来约会吗？</h1>
+      <p class="sub" id="askSub">今天这种日子，当然要约你。</p>
       <div class="btns" id="askBtns">
-        <button class="btn-yes" id="btnYes">好呀，赴约</button>
-        <button class="btn-no" id="btnNo">再想想…</button>
+        <button class="btn-yes" id="btnYes">好呀</button>
+        <button class="btn-no" id="btnNo">再想想</button>
       </div>
     </section>
 
     <section class="screen" id="screen-details">
-      <div class="hero-mark">约</div>
-      <h1>太好啦 cc，那我们来安排七夕夜</h1>
-      <p class="sub">告诉我，这一晚你想怎么过</p>
+      <div class="hero">✨</div>
+      <h1>太好了，那我们安排一下</h1>
+      <p class="sub">告诉我 cc 今晚想怎么过</p>
 
       <div class="field">
-        <label>想去哪里吃</label>
+        <label>想去哪吃</label>
         <div class="options" id="restaurantOptions"></div>
         <div class="custom-wrap" id="customWrap">
           <input type="text" id="customRestaurant" placeholder="写下你想去的地方" maxlength="40" />
@@ -363,8 +300,8 @@
       </div>
 
       <div class="field" style="margin-bottom:8px;">
-        <label>想对我说的话（可选）</label>
-        <textarea id="message" placeholder="写点什么，比如：记得带一枝花" maxlength="120"></textarea>
+        <label>想对我说的（可选）</label>
+        <textarea id="message" placeholder="比如：记得带花" maxlength="120"></textarea>
       </div>
 
       <p class="hint" id="detailsHint"></p>
@@ -372,18 +309,18 @@
     </section>
 
     <section class="screen" id="screen-done">
-      <div class="hero-mark">约</div>
-      <h1 id="doneTitle">七夕之约，定下了</h1>
-      <p class="sub" id="doneSub">这是我和 cc 的小约定</p>
+      <div class="hero">🎉</div>
+      <h1 id="doneTitle">约会锁定了</h1>
+      <p class="sub" id="doneSub">这是我和 cc 的七夕计划</p>
 
       <div class="summary" id="summaryCard"></div>
 
       <div class="stack" id="doneActions">
-        <button class="btn-wide" id="btnCopy">复制文案，发给他</button>
+        <button class="btn-wide" id="btnCopy">复制，发给他</button>
         <button class="btn-ghost" id="btnShare">生成分享链接</button>
       </div>
 
-      <p class="footnote">金风玉露 · 为 cc 而写</p>
+      <p class="footnote">made for cc</p>
     </section>
   </div>
 </div>
@@ -392,18 +329,18 @@
 
 <script>
 const CONFIG = {
-  askTitle: "cc，七夕这一夜，可以赏脸和我见一面吗？",
-  askSub: "鹊桥难再，这一次，想把位置留给你。",
+  askTitle: "cc，七夕晚上出来约会吗？",
+  askSub: "今天这种日子，当然要约你。",
   persuasions: [
-    { mark: "盼", title: "诶，cc 再想想嘛，鹊桥就差这一步了" },
-    { mark: "再", title: "这个答案我不接受，cc 再选一次" },
-    { mark: "食", title: "我已经想好带你去吃什么了，真的不来？" },
-    { mark: "鹊", title: "那个按钮会把喜鹊吓跑的，不许点" },
-    { mark: "赏", title: "就当 cc 赏我一个七夕面子，好不好" },
-    { mark: "月", title: "连月亮都在看你怎么选呢" },
-    { mark: "惊喜", title: "我给 cc 准备了小惊喜，选「好」才能看到" },
-    { mark: "请", title: "一年一次的晚上，cc 答应我好不好" },
-    { mark: "好", title: "好啦，那个键别点了，点这个大大的「好」嘛" },
+    { mark: "🥺", title: "诶，cc 再想想嘛，拒绝我会有点伤心" },
+    { mark: "🙈", title: "这个答案我不接受，再选一次" },
+    { mark: "🍜", title: "我都想好带你去吃什么了，真的不来？" },
+    { mark: "😤", title: "那个按钮有点危险，建议别点" },
+    { mark: "🌷", title: "就当给我一个面子嘛，cc" },
+    { mark: "🌙", title: "今晚烟花都准备好了，就差你" },
+    { mark: "🎁", title: "我给 cc 准备了小惊喜，选「好」才能看" },
+    { mark: "🥹", title: "一年就这一天，cc 答应我好不好" },
+    { mark: "💗", title: "好啦，点这个大大的「好」就行" },
   ],
   restaurants: [
     { emoji: "🍲", name: "火锅" },
@@ -417,12 +354,10 @@ const CONFIG = {
 
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ---------- 星空 ---------- */
 (function drawSky() {
   const cvs = document.getElementById("sky");
   const ctx = cvs.getContext("2d");
   const stars = [];
-
   function resize() {
     cvs.width = window.innerWidth * devicePixelRatio;
     cvs.height = window.innerHeight * devicePixelRatio;
@@ -430,26 +365,22 @@ const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
   resize();
   window.addEventListener("resize", resize);
-
-  const n = Math.min(90, Math.floor(window.innerWidth * 0.09));
+  const n = Math.min(70, Math.floor(window.innerWidth * 0.07));
   for (let i = 0; i < n; i++) {
     stars.push({
-      x: Math.random(),
-      y: Math.random() * 0.78,
-      r: Math.random() * 1.15 + 0.25,
-      a: 0.15 + Math.random() * 0.55,
+      x: Math.random(), y: Math.random() * 0.8,
+      r: Math.random() * 1.05 + 0.2,
+      a: 0.12 + Math.random() * 0.45,
       p: Math.random() * Math.PI * 2,
       s: 0.4 + Math.random() * 0.8,
     });
   }
-
   function tick(t) {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = window.innerWidth, h = window.innerHeight;
     ctx.clearRect(0, 0, w, h);
     stars.forEach(st => {
       const tw = reduced ? st.a : st.a * (0.55 + 0.45 * Math.sin(t * 0.001 * st.s + st.p));
-      ctx.fillStyle = "rgba(232,223,210," + tw + ")";
+      ctx.fillStyle = "rgba(255,245,238," + tw + ")";
       ctx.beginPath();
       ctx.arc(st.x * w, st.y * h, st.r, 0, Math.PI * 2);
       ctx.fill();
@@ -459,7 +390,6 @@ const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   requestAnimationFrame(tick);
 })();
 
-/* ---------- 烟花：疏、慢、暖金 ---------- */
 const fw = document.getElementById("fireworks");
 const fctx = fw.getContext("2d");
 function sizeFw() {
@@ -471,11 +401,11 @@ sizeFw();
 window.addEventListener("resize", sizeFw);
 
 const PALETTE = [
-  [212, 181, 106],
-  [232, 208, 154],
-  [196, 120, 110],
-  [230, 214, 190],
-  [180, 140, 90],
+  [255, 107, 138],
+  [255, 176, 190],
+  [255, 230, 220],
+  [196, 164, 255],
+  [255, 255, 255],
 ];
 
 const rockets = [];
@@ -484,89 +414,59 @@ const sparks = [];
 function launch(x, y, festive) {
   const color = PALETTE[Math.floor(Math.random() * PALETTE.length)];
   rockets.push({
-    x, y,
-    tx: x + (Math.random() - 0.5) * 40,
-    ty: y,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: festive ? -7.2 : -6.2 - Math.random() * 1.1,
-    color,
-    festive,
-    life: 0,
+    x, y, vx: (Math.random() - 0.5) * 0.35,
+    vy: festive ? -7.2 : -6.1 - Math.random() * 1.1,
+    color, festive,
   });
 }
 
 function burst(x, y, color, festive) {
-  const n = festive ? 46 : 30;
+  const n = festive ? 44 : 28;
   for (let i = 0; i < n; i++) {
-    const a = (Math.PI * 2 * i) / n + Math.random() * 0.2;
-    const sp = (festive ? 2.4 : 1.7) + Math.random() * (festive ? 1.8 : 1.2);
+    const a = (Math.PI * 2 * i) / n + Math.random() * 0.18;
+    const sp = (festive ? 2.3 : 1.6) + Math.random() * (festive ? 1.7 : 1.15);
     sparks.push({
-      x, y,
-      vx: Math.cos(a) * sp,
-      vy: Math.sin(a) * sp,
-      life: 1,
-      decay: 0.012 + Math.random() * 0.01,
-      color,
-      r: festive ? 1.55 : 1.2,
+      x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp,
+      life: 1, decay: 0.013 + Math.random() * 0.01,
+      color, r: festive ? 1.5 : 1.15,
     });
   }
 }
 
 function celebrate() {
   if (reduced) return;
-  const w = window.innerWidth;
-  const h = window.innerHeight;
-  launch(w * 0.28, h * 0.42, true);
-  setTimeout(() => launch(w * 0.72, h * 0.36, true), 220);
-  setTimeout(() => launch(w * 0.5, h * 0.3, true), 480);
+  const w = window.innerWidth, h = window.innerHeight;
+  launch(w * 0.3, h * 0.42, true);
+  setTimeout(() => launch(w * 0.7, h * 0.36, true), 220);
+  setTimeout(() => launch(w * 0.5, h * 0.3, true), 460);
 }
 
 (function loopFw() {
   let lastAmbient = 0;
   function tick(t) {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const w = window.innerWidth, h = window.innerHeight;
     fctx.clearRect(0, 0, w, h);
-
-    if (!reduced && t - lastAmbient > 5200 + Math.random() * 2600 && rockets.length < 2) {
+    if (!reduced && t - lastAmbient > 5400 + Math.random() * 2400 && rockets.length < 2) {
       lastAmbient = t;
       launch(w * (0.18 + Math.random() * 0.64), h * (0.22 + Math.random() * 0.28), false);
     }
-
     for (let i = rockets.length - 1; i >= 0; i--) {
       const r = rockets[i];
-      r.x += r.vx;
-      r.y += r.vy;
-      r.vy += 0.055;
-      r.life++;
-      fctx.fillStyle = "rgba(" + r.color.join(",") + ",0.85)";
-      fctx.beginPath();
-      fctx.arc(r.x, r.y, 1.6, 0, Math.PI * 2);
-      fctx.fill();
-      fctx.fillStyle = "rgba(" + r.color.join(",") + ",0.18)";
-      fctx.beginPath();
-      fctx.arc(r.x, r.y + 6, 1.1, 0, Math.PI * 2);
-      fctx.fill();
-      if (r.vy >= -0.4 || r.y <= r.ty - 8) {
+      r.x += r.vx; r.y += r.vy; r.vy += 0.055;
+      fctx.fillStyle = "rgba(" + r.color.join(",") + ",0.9)";
+      fctx.beginPath(); fctx.arc(r.x, r.y, 1.5, 0, Math.PI * 2); fctx.fill();
+      if (r.vy >= -0.35) {
         burst(r.x, r.y, r.color, r.festive);
         rockets.splice(i, 1);
       }
     }
-
     for (let i = sparks.length - 1; i >= 0; i--) {
       const p = sparks[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vy += 0.018;
-      p.vx *= 0.992;
-      p.life -= p.decay;
+      p.x += p.vx; p.y += p.vy; p.vy += 0.018; p.vx *= 0.992; p.life -= p.decay;
       if (p.life <= 0) { sparks.splice(i, 1); continue; }
-      fctx.fillStyle = "rgba(" + p.color.join(",") + "," + (p.life * 0.72) + ")";
-      fctx.beginPath();
-      fctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
-      fctx.fill();
+      fctx.fillStyle = "rgba(" + p.color.join(",") + "," + (p.life * 0.7) + ")";
+      fctx.beginPath(); fctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2); fctx.fill();
     }
-
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
@@ -591,16 +491,13 @@ function escalate() {
   askEmoji.textContent = p.mark;
   askTitle.textContent = p.title;
   askSub.textContent = "";
-
   yesScale = Math.min(yesScale + 0.14, 1.85);
   btnYes.style.transform = "scale(" + yesScale + ")";
   btnYes.style.margin = 6 + yesScale * 3 + "px";
-
   const shrink = Math.max(1 - noCount * 0.12, 0.35);
   btnNo.style.fontSize = 15 * shrink + "px";
   btnNo.style.padding = (12 * shrink) + "px " + (20 * shrink) + "px";
   btnNo.style.opacity = Math.max(1 - noCount * 0.09, 0.35);
-
   noCount++;
   if (noCount >= 3) enableDodge();
 }
@@ -704,9 +601,9 @@ function renderSummary(data) {
   currentResult = data;
   const card = document.getElementById("summaryCard");
   let html = "";
-  html += '<div class="row"><span class="k">◇</span><span class="v">想吃的：<b>' + escapeHtml(data.r) + '</b></span></div>';
-  html += '<div class="row"><span class="k">◇</span><span class="v">接她时间：<b>' + escapeHtml(prettyTime(data.t)) + '</b></span></div>';
-  if (data.m) html += '<div class="row"><span class="k">◇</span><span class="v">悄悄话：<b>' + escapeHtml(data.m) + '</b></span></div>';
+  html += '<div class="row"><span>🍽</span><span>想吃的：<b>' + escapeHtml(data.r) + '</b></span></div>';
+  html += '<div class="row"><span>⏰</span><span>接她时间：<b>' + escapeHtml(prettyTime(data.t)) + '</b></span></div>';
+  if (data.m) html += '<div class="row"><span>💬</span><span>留言：<b>' + escapeHtml(data.m) + '</b></span></div>';
   card.innerHTML = html;
 }
 
@@ -717,11 +614,11 @@ function escapeHtml(s) {
 }
 
 function buildText(data) {
-  let t = "七夕之约，定下了。\n\n";
+  let t = "七夕约会锁定了 💗\n\n";
   t += "想吃的：" + data.r + "\n";
   t += "接我的时间：" + prettyTime(data.t) + "\n";
-  if (data.m) t += "悄悄话：" + data.m + "\n";
-  t += "\n金风玉露一相逢，便胜却人间无数。";
+  if (data.m) t += "留言：" + data.m + "\n";
+  t += "\n说好了，不许反悔。";
   return t;
 }
 
@@ -768,7 +665,7 @@ document.getElementById("btnShare").addEventListener("click", async () => {
   const link = buildShareLink(currentResult);
   if (navigator.share) {
     try {
-      await navigator.share({ title: "七夕之约", text: buildText(currentResult), url: link });
+      await navigator.share({ title: "七夕约会", text: buildText(currentResult), url: link });
       return;
     } catch (e) { /* cancelled */ }
   }
@@ -780,26 +677,21 @@ document.getElementById("btnShare").addEventListener("click", async () => {
   const q = new URLSearchParams(location.search);
   if (!q.has("r") || !q.has("t")) return;
   const data = { r: q.get("r") || "", t: q.get("t") || "", m: q.get("m") || "" };
-
   document.getElementById("doneTitle").textContent = "cc 答应啦";
-  document.getElementById("doneSub").textContent = "这是 cc 选好的七夕之约";
+  document.getElementById("doneSub").textContent = "这是 cc 选好的七夕计划";
   renderSummary(data);
-
   const actions = document.getElementById("doneActions");
   actions.innerHTML = "";
-
   const calBtn = document.createElement("button");
   calBtn.className = "btn-wide";
-  calBtn.textContent = "加入我的日历";
+  calBtn.textContent = "加入日历";
   calBtn.addEventListener("click", () => downloadICS(data));
   actions.appendChild(calBtn);
-
   const againBtn = document.createElement("button");
   againBtn.className = "btn-ghost";
   againBtn.textContent = "我也来发一个";
   againBtn.addEventListener("click", () => { location.href = location.origin + location.pathname; });
   actions.appendChild(againBtn);
-
   showScreen("screen-done");
   setTimeout(celebrate, 250);
 })();
@@ -818,8 +710,8 @@ function downloadICS(data) {
     "BEGIN:VEVENT",
     "DTSTART:" + fmt(start),
     "DTEND:" + fmt(end),
-    "SUMMARY:七夕之约 · " + data.r,
-    "DESCRIPTION:" + (data.m ? data.m.replace(/\n/g, " ") : "金风玉露，赴约。"),
+    "SUMMARY:七夕约会 · " + data.r,
+    "DESCRIPTION:" + (data.m ? data.m.replace(/\n/g, " ") : "和 cc 的七夕约会"),
     "END:VEVENT", "END:VCALENDAR",
   ].join("\r\n");
   const blob = new Blob([ics], { type: "text/calendar" });
